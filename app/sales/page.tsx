@@ -4,10 +4,11 @@ import { useAppSelector } from '@/lib/hooks';
 import { selectExcelData } from '@/lib/features/pharma/pharmaSlice';
 
 const PurchasePage = () => {
-    const [distributor, setDistributor] = useState('');
-    const [item, setItem] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [price, setPrice] = useState('');
+    const [medicineName, setMedicineName] = useState('');
+    const [quantitySold, setQuantitySold] = useState('');
+    const [salePrice, setSalePrice] = useState('');
+    const [totalAmount, setTotalAmount] = useState('');
+    const [saleDate, setSaleDate] = useState('');
     const excelData = useAppSelector(selectExcelData);  
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -17,17 +18,18 @@ const PurchasePage = () => {
       alert('No Purchase data found. Please upload the file first.');
       return;
     }
- 
+  
     const payload = {
         updatedData: excelData,
-        distributor,
-        item,
-        quantity,
-        price
+        medicineName,
+        quantitySold,
+        salePrice,
+        totalAmount,
+        saleDate
     }
 
     try {
-      const response = await fetch('/api/purchase', {
+      const response = await fetch('/api/sales', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -55,39 +57,47 @@ const PurchasePage = () => {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-4">Update Purchase Data</h1>
+    <main className="flex flex-col quantitySolds-center justify-center min-h-screen p-8 bg-gray-100">
+      <h1 className="text-3xl font-bold mb-4">Sales Data</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
-          value={distributor}
-          placeholder="Enter Distributor Name"
-          onChange={(e) => setDistributor(e.target.value)}
-          className="border px-4 py-2 rounded-md"
-          required
-        />
-        <input
-          type="text"
-          value={item}
-          placeholder="Enter Item Name"
-          onChange={(e) => setItem(e.target.value)}
+          value={medicineName}
+          placeholder="Enter medicineName Name"
+          onChange={(e) => setMedicineName(e.target.value)}
           className="border px-4 py-2 rounded-md"
           required
         />
         <input
           type="number"
-          value={quantity}
+          value={quantitySold}
+          placeholder="Enter quantitySold Name"
+          onChange={(e) => setQuantitySold(e.target.value)}
+          className="border px-4 py-2 rounded-md"
+          required
+        />
+        <input
+          type="number"
+          value={salePrice}
           placeholder="Enter Quantity"
-          onChange={(e) => setQuantity(e.target.value)}
+          onChange={(e) => setSalePrice(e.target.value)}
           className="border px-4 py-2 rounded-md"
           required
         />
         <input
           type="number"
-          value={price}
+          value={totalAmount}
           placeholder="Enter Price"
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setTotalAmount(e.target.value)}
+          className="border px-4 py-2 rounded-md"
+          required
+        />
+        <input
+          type="date"
+          value={saleDate}
+          placeholder="Enter Date"
+          onChange={(e) => setSaleDate(e.target.value)}
           className="border px-4 py-2 rounded-md"
           required
         />

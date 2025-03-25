@@ -39,7 +39,6 @@ export default function UploadPage() {
         stock: jsonData4
       }
       dispatch(setExcelData(finalJsonData));
-      console.log("first row", jsonData[0]);
       router.push("home")
     } else {
       setError("Please upload a valid Excel file (.xlsx)");
