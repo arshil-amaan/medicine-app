@@ -21,6 +21,8 @@ const Home = () => {
           <Link className="bg-green-500 text-white px-4 py-2 rounded" href={'/distributer'}>Distributer</Link>
           <Link className="bg-purple-500 text-white px-4 py-2 rounded" href={'/purchase'}>Purchase</Link>
           <Link className="bg-purple-500 text-white px-4 py-2 rounded" href={'/upload'}>upload</Link>
+          <Link className="bg-purple-500 text-white px-4 py-2 rounded" href={'/sales'}>Sales</Link>
+          <Link className="bg-purple-500 text-white px-4 py-2 rounded" href={'/stock'}>Stock</Link>
         </div>
         <button onClick={handleShowData} className="mt-4 bg-red-500 text-white px-4 py-2 rounded">Show Store Data on Console</button>
       </>
